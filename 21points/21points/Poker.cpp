@@ -331,7 +331,6 @@ void Poker::notOver21End()//沒人得點大於21的遊戲結果
 		cout << "\nDraw\nNow your money is: " << money;
 	else
 		cout << "\nLose\nYou lost " << bet << "\nNow your money is: " << (money -= bet);
-	money -= bet;
 	int choice;
 	cout << "\n\n輸入1以繼續遊戲 ,輸入2以離開遊戲\n";
 	cin >> choice;
