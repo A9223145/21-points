@@ -4,6 +4,19 @@ Poker::Poker()//建構子
 {
 	//cout << "\nuse Poker";
 
+	cout << "\n88          88                       88        88                       88";
+	cout << "\n88          88                       88        \"\"                       88";
+	cout << "\n88          88                       88                                 88";
+	cout << "\n88,dPPYba,  88 ,adPPYYba,  ,adPPYba, 88   ,d8  88 ,adPPYYba,  ,adPPYba, 88   ,d8";
+	cout << "\n88P'    \"8a 88 \"\"     `Y8 a8\"     \"\" 88 ,a8\"   88 \"\"     `Y8 a8\"     \"\" 88 ,a8\"";
+	cout << "\n88       d8 88 ,adPPPPP88 8b         8888[     88 ,adPPPPP88 8b         8888[";
+	cout << "\n88b,   ,a8\" 88 88,    ,88 \"8a,   ,aa 88`\"Yba,  88 88,    ,88 \"8a,   ,aa 88`\"Yba,";
+	cout << "\n8Y\"Ybbd8\"'  88 `\"8bbdP\"Y8  `\"Ybbd8\"' 88   `Y8a 88 `\"8bbdP\"Y8  `\"Ybbd8\"' 88   `Y8a";
+	cout << "\n" << setw(49) << ",88";
+	cout << "\n" << setw(49) << "888P\"";
+
+
+
 	setDefaultDeck();
 	setMoney(200);
 	setSrand();
@@ -153,6 +166,7 @@ void Poker::printPlayerCard()//印出玩家手牌
 {
 	//cout << "\nuse printPlayerCard \n";
 
+	cout << "\n玩家手牌: \n";
 	int i = 0;
 	while (playerCard[i] != -1) {
 		printSuit(playerCard[i]);
@@ -160,12 +174,14 @@ void Poker::printPlayerCard()//印出玩家手牌
 		cout << "  ";
 		i++;
 	}
+
 }
 
 void Poker::printBankerCard()//印出莊家手牌 
 {
 	//cout << "\nuse printBankerCard \n";
 
+	cout << "\n莊家手牌: \n";
 	int i = 0;
 	while (bankerCard[i] != -1) {
 		printSuit(bankerCard[i]);
@@ -173,7 +189,7 @@ void Poker::printBankerCard()//印出莊家手牌
 		cout << "  ";
 		i++;
 	}
-	cout << endl;
+
 }
 
 
@@ -185,6 +201,39 @@ int Poker::getNumOfCard(int list[])//取得手牌張數
 	while (list[i] != -1)
 		i++;
 	return i;
+}
+
+void Poker::checkFiveCardCharlie()//判斷玩家手牌數是否為5 
+{
+	//cout << "\nuse fiveCardCharlie";
+
+	if (getNumOfCard(playerCard) == 5) {
+		printPlayerCard();
+		cout << "\nYour point: " << getPoint(playerCard) << endl;
+		cout << "\nFive card Charlie!!!3xBonus\nYou win " << bet * 3 << "\nNow your money is " << (money += bet * 3)<<endl;
+		int choice = 3;
+		while (choice == 1 || choice == 2 || choice == 3) {
+			if (choice == 1)
+				break;
+			if (choice != 3) {
+				cout << "\nMoney:" << getMoney() << "\tBet:" << getBet() << endl;
+				printPlayerCard();
+				cout << "\nYour point: " << getPoint(playerCard) << endl;
+				printBankerCard();
+				cout << endl;
+			}
+
+			cout << "\n請輸入1 以繼續遊戲 ,2 以結束遊戲\n";
+			cin >> choice;
+
+			switch (choice) {
+			case 1:newGame(); break;
+			case 2:exit(0); break;
+			default:cout << "\n請重新輸入"; choice = 3;
+			}
+		}
+	}
+
 }
 
 int Poker::getPoint(int list[])//取得手牌得點 
@@ -208,13 +257,14 @@ int Poker::getPoint(int list[])//取得手牌得點
 		return point;
 }
 
-void Poker::checkOver21(int list[])//判斷得點是否超過21 
+void Poker::checkBust()//判斷玩家得點是否超過21 
 {
-	//cout << "\nuse checkOver21 :"<<getPoint(playerCard);
+	//cout << "\nuse checkBust :" << getPoint(playerCard);
 	//printPlayerCard();
 
-	if (getPoint(list) >= 21 || getNumOfCard(list) == 5)
+	if (getPoint(playerCard) >= 21)
 		stopAsk();
+	checkFiveCardCharlie();
 }
 
 
@@ -224,7 +274,7 @@ void Poker::playerAsk()//玩家要牌
 	//cout << "\nuse playerAsk";
 
 	setPlayerCard(deck[cardNum++], getNumOfCard(playerCard));
-	checkOver21(playerCard);
+	checkBust();
 }
 
 void Poker::stopAsk()//玩家停止要牌 
@@ -234,31 +284,26 @@ void Poker::stopAsk()//玩家停止要牌
 	bankerAsk();
 
 	if (getPoint(playerCard) >= 21 || getPoint(bankerCard) >= 21) {
-		cout << "\n玩家手牌: \n";
-		printPlayerCard();
-		cout << "\nYour point: " << getPoint(playerCard) << endl;
-		cout << "\n莊家手牌: \n";
-		printBankerCard();
-		cout << "Banker point: " << getPoint(bankerCard) << endl;
-		over21End();
-	}
-	else if (getNumOfCard(playerCard) == 5 || getNumOfCard(bankerCard) == 5)
-	{
-		cout << "\n玩家手牌: \n";
-		printPlayerCard();
-		cout << "\nYour point: " << getPoint(playerCard) << endl;
-		cout << "\n莊家手牌: \n";
-		printBankerCard();
-		cout << "Banker point: " << getPoint(bankerCard) << endl;
+		if (getPoint(playerCard) > 21) {
+			printPlayerCard();
+			cout << "\nYour point: " << getPoint(playerCard)<<endl;
+		}
+		else {
+			printPlayerCard();
+			cout << "\nYour point: " << getPoint(playerCard)<<endl;
+			printBankerCard();
+			cout << "\nBanker point: " << getPoint(bankerCard) << endl;
+		}
+
+		bustEnd();
 	}
 	else {
-		cout << "\n玩家手牌: \n";
 		printPlayerCard();
-		cout << "\nYour point: " << getPoint(playerCard) << endl;
-		cout << "\n莊家手牌: \n";
+		cout << "\nYour point: " << getPoint(playerCard)<<endl;
 		printBankerCard();
-		cout << "Banker point: " << getPoint(bankerCard) << endl;
-		notOver21End();
+		cout<<"\nBanker point: "<< getPoint(bankerCard) << endl;
+
+		notBustEnd();
 	}
 }
 
@@ -272,7 +317,7 @@ void Poker::bankerAsk()//莊家要牌
 
 void Poker::BankerPointCheck()//檢查莊家點數是否大於17 
 {
-	//cout << "\nuse BankerPointCheck :"<< getPoint(bankerCard);
+	//cout << "\nuse BankerPointCheck :" << getPoint(bankerCard);
 	//printBankerCard();
 
 	if (getPoint(bankerCard) < 17)
@@ -280,63 +325,88 @@ void Poker::BankerPointCheck()//檢查莊家點數是否大於17
 }
 
 
-void Poker::over21End()//有人得點大於21的遊戲結果 
+void Poker::bustEnd()//有人得點大於21的遊戲結果 
 {
-	//cout << "\nuse over21End";
+	//cout << "\nuse bustEnd";
 
 	int pp = getPoint(playerCard);
 	int bp = getPoint(bankerCard);
 
-	if ((pp && bp) == 21)
-		cout << "\nDraw\nNow your money is: " << money;
-	else if (pp == 21)
-		cout << "\nBig win!!\nYou won " << bet * 3 / 2 << "\nNow your money is: " << (money += bet * 3 / 2);
-	else if (bp > 21 && pp < 21)
-		cout << "\nWin!\nYou won " << bet << "\nNow your money is: " << (money += bet);
-	else
-		cout << "\nLose\nYou lost " << bet << "\nNow your money is: " << (money -= bet);
-	int choice;
-	cout << "\n\n輸入1以繼續遊戲 ,輸入2以離開遊戲\n";
-	cin >> choice;
-	switch (choice) {
-	case 1:newGame(); break;
-	case 2:exit(0); break;
+	if (pp == 21 && bp == 21) {
+		cout << "\nDraw\nNow your money is " << money<<endl;
 	}
-}
-void Poker::equal5End()//過五關的遊戲結果
-{
-	//cout << "\nuse equal5End";
-	int pp = getNumOfCard(playerCard);
+	else if (pp == 21) {
+		if (getNumOfCard(playerCard) == 2)
+			cout << "\nBlack Jack!!!1.5xBonus\nYou won " << bet * 3 / 2 << "\nNow your money is " << (money += bet * 3 / 2)<<endl;
+		else
+			cout << "\nWin\nYou won " << bet << "\nNow your money is " << (money += bet)<<endl;
+	}
+	else if (bp > 21 && pp < 21) {
+		cout << "\nWin\nYou won " << bet << "\nNow your money is " << (money += bet)<<endl;
+	}
+	else {
+		cout << "\nLose\nYou lost " << bet << "\nNow your money is " << (money -= bet)<<endl;
+	}
 
-	if (pp == 5)
-		cout << "\nHuge win!!!\nYou won " << bet * 3 << "\nNow your money is: " << (money += bet * 3);
-	int choice;
-	cout << "\n\n輸入1以繼續遊戲 ,輸入2以離開遊戲\n";
-	cin >> choice;
-	switch (choice) {
-	case 1:newGame(); break;
-	case 2:exit(0); break;
+	int choice = 3;
+	while (choice == 1 || choice == 2 || choice == 3) {
+		if (choice == 1)
+			break;
+		if (choice != 3) {
+			cout << "\nMoney:" << getMoney() << "\tBet:" << getBet() << endl;
+			printPlayerCard();
+			cout << "\nYour point: " << getPoint(playerCard) << endl;
+			printBankerCard();
+			cout << endl;
+		}
+		
+		cout << "\n請輸入1 以繼續遊戲 ,2 以結束遊戲\n";
+		cin >> choice;
+
+		switch (choice) {
+		case 1:newGame(); break;
+		case 2:exit(0); break;
+		default:cout << "\n請重新輸入"; choice = 3;
+		}
 	}
 }
-void Poker::notOver21End()//沒人得點大於21的遊戲結果 
+
+void Poker::notBustEnd()//沒人得點大於21的遊戲結果 
 {
-	//cout << "\nuse notOver21End";
+	//cout << "\nuse notBustEnd";
 
 	int pp = getPoint(playerCard);
 	int bp = getPoint(bankerCard);
 
-	if (pp > bp)
-		cout << "\nWin!\nYou won " << bet << "\nNow your money is: " << (money += bet);
-	else if (pp == bp)
-		cout << "\nDraw\nNow your money is: " << money;
-	else
-		cout << "\nLose\nYou lost " << bet << "\nNow your money is: " << (money -= bet);
-	int choice;
-	cout << "\n\n輸入1以繼續遊戲 ,輸入2以離開遊戲\n";
-	cin >> choice;
-	switch (choice) {
-	case 1:newGame(); break;
-	case 2:exit(0); break;
+	if (pp > bp) {
+		cout << "\nWin\nYou win " << bet << "\nNow your money is " << (money += bet)<<endl;
+	}
+	else if (pp == bp) {
+		cout << "\nDraw\nNow your money is " << money<<endl;
+	}
+	else {
+		cout << "\nLose\nYou lose " << bet << "\nNow your money is " << (money -= bet)<<endl;
+	}
+	int choice = 3;
+	while (choice == 1 || choice == 2 || choice == 3) {
+		if (choice == 1)
+			break;
+		if (choice != 3) {
+			cout << "\nMoney:" << getMoney() << "\tBet:" << getBet() << endl;
+			printPlayerCard();
+			cout << "\nYour point: " << getPoint(playerCard) << endl;
+			printBankerCard();
+			cout << endl;
+		}
+		
+		cout << "\n請輸入1 以繼續遊戲 ,2 以結束遊戲\n";
+		cin >> choice;
+
+		switch (choice) {
+		case 1:newGame(); break;
+		case 2:exit(0); break;
+		default:cout << "\n請重新輸入"; choice = 3;
+		}
 	}
 }
 
@@ -344,24 +414,20 @@ void Poker::notOver21End()//沒人得點大於21的遊戲結果
 
 void Poker::choice()//選擇抽牌or停止抽牌or重新開始or結束遊戲 
 {
-	cout << "\nuse choice";
+	//cout << "\nuse choice";
 
 	int choice = 1;
 
 	while (choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5) {
-		if (money <= 0) {
-			cout << "\nYou don't have money";
-			exit(0);
-		}
+
 		if (choice != 5) {
-			cout << "\nMoney:" << getMoney() << "\tBet:" << getBet();
-			cout << "\n玩家手牌: \n";
+			cout << "\nMoney:" << getMoney() << "\tBet:" << getBet()<<endl;
 			printPlayerCard();
-			cout << "\nYour point: " << getPoint(playerCard) << endl;
-			cout << "\n莊家手牌: \n";
+			cout << "\nYour point: " << getPoint(playerCard)<<endl;
 			printBankerCard();
+			cout << endl;
 		}
-		cout << "\n請輸入1以抽牌 ,2以停止抽牌 ,3以重新開始 ,4 以結束遊戲\n";
+		cout << "\n請輸入1 以抽牌 ,2 以停止抽牌 ,3 以重新開始 ,4 以結束遊戲\n";
 		cin >> choice;
 
 		switch (choice) {
@@ -378,21 +444,23 @@ void Poker::newGame()//開啟新遊戲
 {
 	//cout << "\nuse newGame";
 
-	shuffle();
-
-	int b;
 	if (money <= 0) {
 		cout << "\nYou don't have money";
 		exit(0);
 	}
-	cout << "\nMoney:" << getMoney() << "\nSet your bet:";
+
+	shuffle();
+
+	cout << "\nMoney:" << getMoney() << "\nSet your bet\n";
+	int b;
 	cin >> b;
 	setBet(b);
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 6; i++) {
 		setPlayerCard(-1, i);
 		setBankerCard(-1, i);
 	}
 	setPlayerCard(deck[cardNum++], 0);
 	setPlayerCard(deck[cardNum++], 1);
 	setBankerCard(deck[cardNum++], 0);
+	checkBust();
 }

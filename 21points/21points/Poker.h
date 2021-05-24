@@ -10,8 +10,8 @@ class Poker
 {
 private:
 	int deck[52];//牌堆 
-	int playerCard[5];//玩家手牌 
-	int bankerCard[5];//莊家手牌 
+	int playerCard[6];//玩家手牌 
+	int bankerCard[6];//莊家手牌 
 	int money;//錢 
 	int bet;//賭注 
 	int cardNum;//於牌堆抽牌的次數 
@@ -39,19 +39,20 @@ public:
 	void printBankerCard();//印出莊家手牌 
 
 	int getNumOfCard(int[]);//取得手牌張數 
+	void checkFiveCardCharlie();//判斷玩家手牌數是否為5
 	int getPoint(int[]);//取得手牌得點 
-	void checkOver21(int[]);//判斷得點是否大於21 
+	void checkBust();//判斷玩家得點是否大於21 
 
 	void playerAsk();//玩家要牌 
 	void stopAsk();//玩家停止要牌 
 	void bankerAsk();//莊家要牌 
 	void BankerPointCheck();//檢查莊家得點是否大於17 
 
-	void over21End();//有人得點大於21的遊戲結果 
-	void equal5End();//過五關的遊戲結果
-	void notOver21End();//沒人得點大於21的遊戲結果 
+	void bustEnd();//有人得點大於21的遊戲結果 
+	void notBustEnd();//沒人得點大於21的遊戲結果 
 
 	void choice();//選擇抽牌or停止抽牌or重新開始or結束遊戲 
 	void newGame();//開啟新遊戲 
 };
 #endif
+
