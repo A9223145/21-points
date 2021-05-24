@@ -1,0 +1,6 @@
+﻿  Source.cpp
+  Poker.cpp
+C:\Users\meowmii\source\repos\21points\21points\Poker.cpp(97,12): warning C4244: '引數': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
+C:\Users\meowmii\source\repos\21points\21points\Poker.cpp(290,20): warning C4806: '==': 不安全的作業: 類型 'bool' 升至類型 'int' 後沒有值可以等於所給的常數
+  正在產生程式碼...
+  21points.vcxproj -> C:\Users\meowmii\source\repos\21points\Debug\21points.exe
