@@ -1,0 +1,3 @@
+﻿  BlackJack.cpp
+C:\Users\user\source\repos\blackjackV1.21\blackjackV1.21\BlackJack.cpp(80,17): warning C4244: '引數': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
+  blackjackV1.21.vcxproj -> C:\Users\user\source\repos\blackjackV1.21\Debug\blackjackV1.21.exe
