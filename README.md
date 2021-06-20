@@ -31,7 +31,8 @@
   * setPlayerNum:設置玩家人數
   * printSuit:印出花色  
   * printPoint:印出點數
-  * printDealer:印出莊家手牌  
+  * printDealer:印出全部手牌(莊家只印第一張牌)
+  * printStatus:印出全部手牌
   * process:執行規則及輸出  
 ***
 * **遊戲畫面**:  
