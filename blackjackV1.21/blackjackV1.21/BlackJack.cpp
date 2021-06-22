@@ -1,6 +1,6 @@
 #include "BlackJack.h"
 
-void BlackJack::peek() {//Àx¦s¤§¼Æ¦r
+void BlackJack::peek() {//å„²å­˜ä¹‹æ•¸å­—
 	cout << " dealer ";
 	for (int index = 0; index < 6; index++)
 		cout << dealer[index] << ' ';
@@ -12,7 +12,7 @@ void BlackJack::peek() {//Àx¦s¤§¼Æ¦r
 		cout << endl;
 	}
 }
-void BlackJack::peek2() {//Âà´«¬°±oÂI
+void BlackJack::peek2() {//è½‰æ›ç‚ºå¾—é»
 	cout << " dealer ";
 	for (int index = 0; index < 6; index++)
 		cout << setw(2) << getPoint(dealer[index]) << ' ';
@@ -30,16 +30,16 @@ void BlackJack::peek2() {//Âà´«¬°±oÂI
 		}
 	}
 }
-void BlackJack::peek3() {//¯S®í°Ê§@
+void BlackJack::peek3() {//ç‰¹æ®Šå‹•ä½œ
 	for (int num = 0; num < playerNum; num++) {
 		cout << "player" << num << ": ";
-		cout << "21ÂI" << player[num].isBlackjack;
-		cout << "«OÀI" << player[num].isInsurance;
-		cout << "¤ÀµP" << player[num].isSplit;
-		cout << "¥[ª`" << player[num].isDouble;
-		cout << "§ë­°" << player[num].isSurrender;
+		cout << "21é»" << player[num].isBlackjack;
+		cout << "ä¿éšª" << player[num].isInsurance;
+		cout << "åˆ†ç‰Œ" << player[num].isSplit;
+		cout << "åŠ æ³¨" << player[num].isDouble;
+		cout << "æŠ•é™" << player[num].isSurrender;
 		if (player[num].isSplit)
-			cout << "¤ÀµP¥[ª`" << player[num].isSplitDouble;
+			cout << "åˆ†ç‰ŒåŠ æ³¨" << player[num].isSplitDouble;
 		cout << endl;
 	}
 }
@@ -55,7 +55,7 @@ BlackJack::BlackJack() {
 88888888P"  88 `"8bbdP"Y8  `"Ybbd8"' 88   `Y8a "Y8888P"  `"8bbdP"Y8  `"Ybbd8"' 88   `Y8a  
 )";
 
-	cout << "\n[1]³æ¤H¹Cª± [2]¥[¤JAI [3]µ²§ô¹CÀ¸ ";
+	cout << "\n[1]å–®äººéŠç© [2]åŠ å…¥AI [3]çµæŸéŠæˆ² ";
 	int choice = 3;
 	while (choice == 3) {
 		cin >> choice;
@@ -63,7 +63,7 @@ BlackJack::BlackJack() {
 		case 1:setPlayerNum(1); break;
 		case 2:setPlayerNum(); break;
 		case 3:exit(0); break;
-		default:cout << "\n½Ğ­«·s¿é¤J:"; choice = 3;
+		default:cout << "\nè«‹é‡æ–°è¼¸å…¥:"; choice = 3;
 		}
 	}
 	if (playerNum == 1) {
@@ -103,22 +103,22 @@ BlackJack::BlackJack() {
 	process();
 	while (1) {
 		if (player[0].money < 10) {
-			cout << "\n¨S¦³¿ú¤F\n[1]¿úÅÜ¬°200«á¤U¤@§½ [2]µ²§ô ";
+			cout << "\næ²’æœ‰éŒ¢äº†\n[1]éŒ¢è®Šç‚º200å¾Œä¸‹ä¸€å±€ [2]çµæŸ ";
 			player[0].money = 200;
 		}
 		else {
-			cout << "\n[1]¤U¤@§½ [2]µ²§ô ";
+			cout << "\n[1]ä¸‹ä¸€å±€ [2]çµæŸ ";
 		}
 		cin >> choice;
 		switch (choice) {
 		case 1:process(); break;
 		case 2:exit(0); break;
-		default:cout << "\n½Ğ­«·s¿é¤J:"; choice = 1;
+		default:cout << "\nè«‹é‡æ–°è¼¸å…¥:"; choice = 1;
 		}
 	}
 }
 void BlackJack::setPlayerNum() {
-	cout << "\n­n»P´X­ÓAI¦@¦P¹Cª±,³Ì¦h7­Ó:";
+	cout << "\nè¦èˆ‡å¹¾å€‹AIå…±åŒéŠç©,æœ€å¤š7å€‹:";
 	int playerNum;
 	cin >> playerNum;
 	this->playerNum = (playerNum < 0) ? 1 : (playerNum > 7) ? 8 : playerNum + 1;
@@ -126,7 +126,7 @@ void BlackJack::setPlayerNum() {
 void BlackJack::setPlayerNum(int playerNum) {
 	this->playerNum = playerNum;
 }
-int  BlackJack::getPoint(int hand[])//¨ú±o¤âµP±oÂI
+int  BlackJack::getPoint(int hand[])//å–å¾—æ‰‹ç‰Œå¾—é»
 {
 	//cout << "\nuse getPoint";
 
@@ -143,7 +143,7 @@ int  BlackJack::getPoint(int hand[])//¨ú±o¤âµP±oÂI
 	}
 	return(A == true && point <= 11) ? point + 10 : point;
 }
-int  BlackJack::getPoint(int num)//¨ú±o«ü©wµPªº±oÂI
+int  BlackJack::getPoint(int num)//å–å¾—æŒ‡å®šç‰Œçš„å¾—é»
 {
 	//cout << "\nuse getPoint";
 
@@ -164,7 +164,7 @@ void BlackJack::splitAsk(int i) {
 	player[i].split[player[i].splitNum++] = deck[askTimes++];
 }
 void BlackJack::printDealer() {
-	cout << "\n\n²ø®a¤âµP:";
+	cout << "\n\nèŠå®¶æ‰‹ç‰Œ:";
 	for (int i = 0; i < 1; i++) {
 		printSuit(dealer[i]);
 		printPoint(dealer[i]);
@@ -184,7 +184,7 @@ void BlackJack::printStatus() {
 	cout << endl;
 }
 void BlackJack::printStatus(int num[]) {
-	cout << "\n²ø®a¤âµP:";
+	cout << "\nèŠå®¶æ‰‹ç‰Œ:";
 	for (int i = 0; i < dealerHandNum; i++) {
 		printSuit(dealer[i]);
 		printPoint(dealer[i]);
@@ -193,10 +193,10 @@ void BlackJack::printStatus(int num[]) {
 }
 void BlackJack::printStatus(int num) {
 	if (num == 0) {
-		cout << "\n§Aªº¤âµP:";
+		cout << "\nä½ çš„æ‰‹ç‰Œ:";
 	}
 	else {
-		cout << "\nplayer" << num << "¤âµP:";
+		cout << "\nplayer" << num << "æ‰‹ç‰Œ:";
 	}
 	for (int i = 0; i < player[num].handNum; i++) {
 		printSuit(player[num].hand[i]);
@@ -209,10 +209,10 @@ void BlackJack::printStatus(int num) {
 }
 void BlackJack::printSplitStatus(int num) {
 	if (num == 0) {
-		cout << "\n¤ÀµP:";
+		cout << "\nåˆ†ç‰Œ:";
 	}
 	else {
-		cout << "\nplayer" << num << "¤ÀµP:";
+		cout << "\nplayer" << num << "åˆ†ç‰Œ:";
 	}
 	for (int i = 0; i < player[num].splitNum; i++) {
 		printSuit(player[num].split[i]);
@@ -220,16 +220,16 @@ void BlackJack::printSplitStatus(int num) {
 		cout << "  ";
 	}
 }
-void BlackJack::printSuit(int num)//¦L¥Xªá¦â(¬õ¤ß¡A¤è¶ôµ¥ 
+void BlackJack::printSuit(int num)//å°å‡ºèŠ±è‰²(ç´…å¿ƒï¼Œæ–¹å¡Šç­‰ 
 {
 	switch (num % 52 / 13) {
-	case 0:cout << "¶Â®ç"; break;
-	case 1:cout << "·R¤ß"; break;
-	case 2:cout << "¤è¶ô"; break;
-	case 3:cout << "±öªá";
+	case 0:cout << "é»‘æ¡ƒ"; break;
+	case 1:cout << "æ„›å¿ƒ"; break;
+	case 2:cout << "æ–¹å¡Š"; break;
+	case 3:cout << "æ¢…èŠ±";
 	}
 }
-void BlackJack::printPoint(int num)//¦L¥XÂI¼Æ(J,Q,Kµ¥ 
+void BlackJack::printPoint(int num)//å°å‡ºé»æ•¸(J,Q,Kç­‰ 
 {
 	switch (num % 13) {
 	case  0:cout << setw(2) << 'A'; break;
@@ -267,10 +267,9 @@ void BlackJack::process() {
 	for (int i = 1; i < playerNum; i++) {
 		if (player[i].money > 50) {
 			player[i].bet = rand() % 41 + 10;
-			player[i].bet = 200;
 		}
 		else if (player[i].money < 10) {
-			cout << "\nplayer" << i << "¨S¿ú¤F,¨Ó¤F·sªºª±®a";
+			cout << "\nplayer" << i << "æ²’éŒ¢äº†,ä¾†äº†æ–°çš„ç©å®¶";
 			player[i].money = 200;
 			player[i].bet = rand() % 41 + 10;
 		}
@@ -280,19 +279,19 @@ void BlackJack::process() {
 	}
 
 	int bet;
-	cout << "\n¿ú:"<<player[0].money<<"\n½Ğ¤Uª`,³Ì¤Ö10¶ô:";
+	cout << "\néŒ¢:"<<player[0].money<<"\nè«‹ä¸‹æ³¨,æœ€å°‘10å¡Š:";
 	cin >> bet;
 	player[0].bet = (bet < 10) ? 10 : (bet > player[0].money) ? player[0].money : bet;
 
-	cout << "\n­nÃB¥~¤Uª`¹ï¤l¶Ü";
-	cout << "\n[-1]¤£­n [0]¦Û¤v ";
+	cout << "\nè¦é¡å¤–ä¸‹æ³¨å°å­å—";
+	cout << "\n[-1]ä¸è¦ [0]è‡ªå·± ";
 	for (int i = 1; i < playerNum; i++) {
 		cout << '[' << i << ']' << "player" << i << ' ';
 	}
 	cin >> choice;
 	while (choice != -1) {
 		if (!(choice >= 0 && choice < playerNum)) {
-			cout << "\nª±®a¤£¦s¦b,½Ğ­«·s¿é¤J:";
+			cout << "\nç©å®¶ä¸å­˜åœ¨,è«‹é‡æ–°è¼¸å…¥:";
 			choice = 1;
 		}
 		else break;
@@ -300,7 +299,7 @@ void BlackJack::process() {
 	}
 
 	if (choice != -1) {
-		cout << "\nª÷ÃB,³Ì¤Ö10¶ô:";
+		cout << "\né‡‘é¡,æœ€å°‘10å¡Š:";
 		cin >> bet;
 		bet = (bet < 10) ? 10 : (bet > player[0].money - player[0].bet) ? player[0].money - player[0].bet : bet;
 	}
@@ -310,11 +309,11 @@ void BlackJack::process() {
 	//peek2();
 	if (choice != -1) {
 		if (player[choice].hand[0] % 13 == player[choice].hand[1] % 13) {
-			cout << "\nÄ¹¤F" << bet * 11;
+			cout << "\nè´äº†" << bet * 11;
 			player[0].money += bet * 11;
 		}
 		else {
-			cout << "\n¿é¤F" << bet;
+			cout << "\nè¼¸äº†" << bet;
 			player[0].money -= bet;
 		}
 	}
@@ -324,30 +323,30 @@ void BlackJack::process() {
 			int bet = rand() % 41 + 10;
 			if (player[target].hand[0] % 13 == player[target].hand[1] % 13) {
 				player[i].money += bet * 11;
-				cout << "\nplayer" << i << "¤Uª`¹ï¤l(player" << target << "),Ä¹¤F" << bet * 11;
+				cout << "\nplayer" << i << "ä¸‹æ³¨å°å­(player" << target << "),è´äº†" << bet * 11;
 			}
 			else {
 				player[i].money -= bet;
-				cout << "\nplayer" << i << "¤Uª`¹ï¤l(player" << target << "),¿é¤F" << bet;
+				cout << "\nplayer" << i << "ä¸‹æ³¨å°å­(player" << target << "),è¼¸äº†" << bet;
 			}
 		}
 	}
 	cout << '\n';
-	//ª±®a¦æ°Ê
+	//ç©å®¶è¡Œå‹•
 
 
-	if (getPoint(player[0].hand) == 21) {//21ÂI
+	if (getPoint(player[0].hand) == 21) {//21é»
 		player[0].isBlackjack = true;
 		player[0].isStand = true;
 	}
 	else {
 		choice = 0;
 		while (choice != 6) {
-			cout << "\n[1]­nµP [2]°±µP ";
-			cout << ((dealer[0] % 13 == 0 && player[0].money - player[0].bet >= player[0].bet / 2) ? ((!player[0].isInsurance) ? "[3]«OÀI " : "[o]«OÀI") : "[x]«OÀI "); //«OÀI
-			cout << ((getPoint(player[0].hand[0]) == getPoint(player[0].hand[1]) && player[0].money - player[0].bet >= player[0].bet) ? "[4]¤ÀµP " : "[x]¤ÀµP "); //¤ÀµP
-			cout << ((player[0].money - player[0].bet >= player[0].bet) ? "[5]¥[ª` " : "[x]¥[ª` ");//¥[ª`
-			cout << "[6]§ë­° ";
+			cout << "\n[1]è¦ç‰Œ [2]åœç‰Œ ";
+			cout << ((dealer[0] % 13 == 0 && player[0].money - player[0].bet >= player[0].bet / 2) ? ((!player[0].isInsurance) ? "[3]ä¿éšª " : "[o]ä¿éšª") : "[x]ä¿éšª "); //ä¿éšª
+			cout << ((getPoint(player[0].hand[0]) == getPoint(player[0].hand[1]) && player[0].money - player[0].bet >= player[0].bet) ? "[4]åˆ†ç‰Œ " : "[x]åˆ†ç‰Œ "); //åˆ†ç‰Œ
+			cout << ((player[0].money - player[0].bet >= player[0].bet) ? "[5]åŠ æ³¨ " : "[x]åŠ æ³¨ ");//åŠ æ³¨
+			cout << "[6]æŠ•é™ ";
 			cin >> choice;
 
 			switch (choice) {
@@ -358,7 +357,7 @@ void BlackJack::process() {
 					player[0].isInsurance = (!player[0].isInsurance) ? true : false;
 				}
 				else {
-					cout << "\n²{¦b¤£¯à«OÀI";
+					cout << "\nç¾åœ¨ä¸èƒ½ä¿éšª";
 				}
 				break;
 			case 4:
@@ -367,7 +366,7 @@ void BlackJack::process() {
 					choice = 6;
 				}
 				else {
-					cout << "\n²{¦b¤£¯à¤ÀµP";
+					cout << "\nç¾åœ¨ä¸èƒ½åˆ†ç‰Œ";
 				}
 				break;
 			case 5:
@@ -379,21 +378,21 @@ void BlackJack::process() {
 					choice = 6;
 				}
 				else {
-					cout << "\n²{¦b¤£¯à¥[ª`";
+					cout << "\nç¾åœ¨ä¸èƒ½åŠ æ³¨";
 				}
 				break;
 			case 6:player[0].isSurrender = true; player[0].isStand = true; choice = 6; player[0].money -= player[0].bet / 2; break;
-			default:cout << "\n½Ğ­«·s¿é¤J:";
+			default:cout << "\nè«‹é‡æ–°è¼¸å…¥:";
 			}
 		}
 	}
 	if (player[0].isInsurance) {
 		if (getPoint(dealer) == 21) {
-			cout << "\n«OÀI Ä¹¤F" << player[0].bet;
+			cout << "\nä¿éšª è´äº†" << player[0].bet;
 			player[0].money += player[0].bet;
 		}
 		else {
-			cout << "\n«OÀI ¿é¤F" << player[0].bet / 2;
+			cout << "\nä¿éšª è¼¸äº†" << player[0].bet / 2;
 			player[0].money -= player[0].bet / 2;
 		}
 	}
@@ -415,15 +414,15 @@ void BlackJack::process() {
 	if (player[0].isStand);
 	else if (player[0].isSplit) {
 		while (!player[0].isStand && getPoint(player[0].hand) < 21 && player[0].handNum < 5) {
-			cout << "\n[1]­nµP [2]°±µP ";
-			cout << ((player[0].handNum > 2) ? "" : ((player[0].money - player[0].bet >= player[0].bet) ? "[3]¥[ª` " : "[x]¥[ª` "));//¥[ª`
+			cout << "\n[1]è¦ç‰Œ [2]åœç‰Œ ";
+			cout << ((player[0].handNum > 2) ? "" : ((player[0].money - player[0].bet >= player[0].bet) ? "[3]åŠ æ³¨ " : "[x]åŠ æ³¨ "));//åŠ æ³¨
 			cin >> choice;
 			switch (choice) {
 			case 1:askCard(0); printStatus(0); break;
 			case 2:player[0].isStand = true; break;
 			case 3:
 				if (player[0].handNum > 2) {
-					cout << "\n½Ğ­«·s¿é¤J:";
+					cout << "\nè«‹é‡æ–°è¼¸å…¥:";
 				}
 				else if (player[0].money - player[0].bet >= player[0].bet) {
 					player[0].isDouble = true;
@@ -432,22 +431,22 @@ void BlackJack::process() {
 					player[0].isStand = true;
 				}
 				else {
-					cout << "\n²{¦b¤£¯à¥[ª`";
+					cout << "\nç¾åœ¨ä¸èƒ½åŠ æ³¨";
 				}
 				break;
-			default:cout << "\n½Ğ­«·s¿é¤J:";
+			default:cout << "\nè«‹é‡æ–°è¼¸å…¥:";
 			}
 		}
 		while (!player[0].isSplitStand && getPoint(player[0].split) < 21 && player[0].splitNum < 5) {
-			cout << "\n[1]¤ÀµP­nµP [2]¤ÀµP°±µP ";
-			cout << ((player[0].splitNum > 2) ? "" : ((player[0].money - player[0].bet >= player[0].bet) ? "[3]¤ÀµP¥[ª` " : "[x]¤ÀµP¥[ª` "));//¥[ª`
+			cout << "\n[1]åˆ†ç‰Œè¦ç‰Œ [2]åˆ†ç‰Œåœç‰Œ ";
+			cout << ((player[0].splitNum > 2) ? "" : ((player[0].money - player[0].bet >= player[0].bet) ? "[3]åˆ†ç‰ŒåŠ æ³¨ " : "[x]åˆ†ç‰ŒåŠ æ³¨ "));//åŠ æ³¨
 			cin >> choice;
 			switch (choice) {
 			case 1:splitAsk(0); printSplitStatus(0); break;
 			case 2:player[0].isSplitStand = true; break;
 			case 3:
 				if (player[0].splitNum > 2) {
-					cout << "\n½Ğ­«·s¿é¤J:";
+					cout << "\nè«‹é‡æ–°è¼¸å…¥:";
 				}
 				else if (player[0].money - player[0].bet >= player[0].bet) {
 					player[0].isSplitDouble = true;
@@ -456,55 +455,55 @@ void BlackJack::process() {
 					player[0].isSplitStand = true;
 				}
 				else {
-					cout << "\n²{¦b¤£¯à¥[ª`";
+					cout << "\nç¾åœ¨ä¸èƒ½åŠ æ³¨";
 				}
 				break;
-			default:cout << "\n½Ğ­«·s¿é¤J:";
+			default:cout << "\nè«‹é‡æ–°è¼¸å…¥:";
 			}
 		}
 	}
 	else {
 		while (!player[0].isStand && getPoint(player[0].hand) < 21 && player[0].handNum < 5) {
-			cout << "\n[1]­nµP [2]°±µP ";
+			cout << "\n[1]è¦ç‰Œ [2]åœç‰Œ ";
 			cin >> choice;
 			switch (choice) {
 			case 1:askCard(0); printStatus(0); break;
 			case 2:player[0].isStand = true; break;
-			default:cout << "\n½Ğ­«·s¿é¤J:";
+			default:cout << "\nè«‹é‡æ–°è¼¸å…¥:";
 			}
 		}
 	}
 
-	//AI¦æ°Ê
+	//AIè¡Œå‹•
 	for (int i = 1; i < playerNum; i++) {
-		if (getPoint(player[i].hand) == 21) {//21ÂI
+		if (getPoint(player[i].hand) == 21) {//21é»
 			player[i].isBlackjack = true;
 			player[i].isStand = true;
 		}
 		else {
-			if (dealer[0] % 13 == 0 && player[i].money - player[i].bet >= player[i].bet / 2) {//«OÀI
+			if (dealer[0] % 13 == 0 && player[i].money - player[i].bet >= player[i].bet / 2) {//ä¿éšª
 				if (rand() % 10 == 9) {
 					player[i].isInsurance = true;
 				}
 			}
-			if (getPoint(player[i].hand[0]) == getPoint(player[i].hand[1]) && player[i].money - player[i].bet >= player[i].bet) {//¤ÀµP
+			if (getPoint(player[i].hand[0]) == getPoint(player[i].hand[1]) && player[i].money - player[i].bet >= player[i].bet) {//åˆ†ç‰Œ
 				if (rand() % 10 > 5) {
 					player[i].isSplit = true;
 				}
 			}
-			if (getPoint(player[i].hand) == 10 || getPoint(player[i].hand) == 11 && player[i].money - player[i].bet >= player[i].bet) {//¥[ª`
+			if (getPoint(player[i].hand) == 10 || getPoint(player[i].hand) == 11 && player[i].money - player[i].bet >= player[i].bet) {//åŠ æ³¨
 				if (rand() % 10 > 3) {
 					player[i].isDouble = true;
 				}
 			}
-			if (getPoint(player[i].hand) >= 12 && getPoint(player[i].hand) <= 16 && getPoint(dealer[0]) >= 7) {//§ë­°
+			if (getPoint(player[i].hand) >= 12 && getPoint(player[i].hand) <= 16 && getPoint(dealer[0]) >= 7) {//æŠ•é™
 				if (rand() % 10 > 6 && player[i].isDouble + player[i].isSplit + player[i].isInsurance == 0) {
 					player[i].isSurrender = true;
 				}
 			}
 		}
 	}
-	for (int i = 1; i < playerNum; i++) {//¤ÀµP
+	for (int i = 1; i < playerNum; i++) {//åˆ†ç‰Œ
 		if (player[i].isSplit) {
 			player[i].isDouble = false;
 			player[i].isSplitDouble = false;
@@ -519,12 +518,12 @@ void BlackJack::process() {
 			player[i].split[0] = player[i].hand[0];
 			askCard(i);
 			splitAsk(i);
-			if (getPoint(player[i].hand) == 10 || getPoint(player[i].hand) == 11 && player[i].money - player[i].bet >= player[i].bet) {//¥[ª`
+			if (getPoint(player[i].hand) == 10 || getPoint(player[i].hand) == 11 && player[i].money - player[i].bet >= player[i].bet) {//åŠ æ³¨
 				if (rand() % 10 > 3) {
 					player[i].isDouble = true;
 				}
 			}
-			if (getPoint(player[i].hand) == 10 || getPoint(player[i].hand) == 11 && player[i].money - player[i].bet >= player[i].bet) {//¤ÀµP¥[ª`
+			if (getPoint(player[i].hand) == 10 || getPoint(player[i].hand) == 11 && player[i].money - player[i].bet >= player[i].bet) {//åˆ†ç‰ŒåŠ æ³¨
 				if (rand() % 10 > 3) {
 					player[i].isSplitDouble = true;
 				}
@@ -535,25 +534,25 @@ void BlackJack::process() {
 	//peek2();
 	for (int i = 1; i < playerNum; i++) {
 		if (player[i].isSplit) {
-			cout << "\nplayer" << i << "¤ÀµP";
+			cout << "\nplayer" << i << "åˆ†ç‰Œ";
 			if (player[i].isInsurance) {
 				if (getPoint(dealer) == 21) {
-					cout << "\nplayer" << i << "«OÀI Ä¹¤F" << player[i].bet;
+					cout << "\nplayer" << i << "ä¿éšª è´äº†" << player[i].bet;
 					player[i].money += player[i].bet;
 				}
 				else {
-					cout << "\nplayer" << i << "«OÀI ¿é¤F" << player[i].bet / 2;
+					cout << "\nplayer" << i << "ä¿éšª è¼¸äº†" << player[i].bet / 2;
 					player[i].money -= player[i].bet / 2;
 				}
 			}
 			if (player[i].isDouble) {
-				cout << "\nplayer" << i << "¥[ª`";
+				cout << "\nplayer" << i << "åŠ æ³¨";
 				askCard(i);
 				player[i].bet *= 2;
 				player[i].isStand = true;
 			}
 			if (player[i].isSplitDouble) {
-				cout << "\nplayer" << i << "¥[ª`(¤ÀµP)";
+				cout << "\nplayer" << i << "åŠ æ³¨(åˆ†ç‰Œ)";
 				splitAsk(i);
 				player[i].splitBet *= 2;
 				player[i].isSplitStand = true;
@@ -562,22 +561,22 @@ void BlackJack::process() {
 		else {
 			if (player[i].isInsurance) {
 				if (getPoint(dealer) == 21) {
-					cout << "\nplayer" << i << "«OÀI Ä¹¤F" << player[i].bet;
+					cout << "\nplayer" << i << "ä¿éšª è´äº†" << player[i].bet;
 					player[i].money += player[i].bet;
 				}
 				else {
-					cout << "\nplayer" << i << "«OÀI ¿é¤F" << player[i].bet / 2;
+					cout << "\nplayer" << i << "ä¿éšª è¼¸äº†" << player[i].bet / 2;
 					player[i].money -= player[i].bet / 2;
 				}
 			}
 			if (player[i].isDouble) {
-				cout << "\nplayer" << i << "¥[ª`";
+				cout << "\nplayer" << i << "åŠ æ³¨";
 				askCard(i);
 				player[i].bet *= 2;
 				player[i].isStand = true;
 			}
 			if (player[i].isSurrender) {
-				cout << "\nplayer" << i << "§ë­°";
+				cout << "\nplayer" << i << "æŠ•é™";
 				player[i].money -= player[i].bet / 2;
 				player[i].isStand = true;
 			}
@@ -587,7 +586,7 @@ void BlackJack::process() {
 		askCard();
 	}
 
-	for (int i = 1; i < playerNum; i++) {//©âµP
+	for (int i = 1; i < playerNum; i++) {//æŠ½ç‰Œ
 		if (player[i].isSplit) {
 			while (!player[i].isStand) {
 				if (getPoint(player[i].hand) >= 20) {
@@ -677,281 +676,281 @@ void BlackJack::process() {
 			}
 		}
 	}
-	//­pºâµ²ªG
+	//è¨ˆç®—çµæœ
 	printStatus();
 	if (getPoint(dealer) >= 21) {
-		if (getPoint(dealer) > 21) {//²ø®aÃzµP
+		if (getPoint(dealer) > 21) {//èŠå®¶çˆ†ç‰Œ
 			if (player[0].isSurrender) {
-				cout << "\n§ë­° ¿é¤F" << player[0].bet / 2;
+				cout << "\næŠ•é™ è¼¸äº†" << player[0].bet / 2;
 			}
 			else if (player[0].isSplit) {
 				if (getPoint(player[0].hand) <= 21) {
-					cout << "\nÄ¹¤F" << player[0].bet;
+					cout << "\nè´äº†" << player[0].bet;
 					player[0].money += player[0].bet;
 				}
 				else {
-					cout << "\n¥­";
+					cout << "\nå¹³";
 				}
 				if (getPoint(player[0].split) <= 21) {
-					cout << "\n¤ÀµPÄ¹¤F" << player[0].splitBet;
+					cout << "\nåˆ†ç‰Œè´äº†" << player[0].splitBet;
 					player[0].money += player[0].splitBet;
 				}
 				else {
-					cout << "\n¤ÀµP¥­";
+					cout << "\nåˆ†ç‰Œå¹³";
 				}
 			}
 			else {
 				if (getPoint(player[0].hand) < 21) {
 					if (player[0].handNum == 5) {
-						cout << "\n¤­Às Ä¹¤F" << player[0].bet * 3;
+						cout << "\näº”é¾ è´äº†" << player[0].bet * 3;
 						player[0].money += player[0].bet * 3;
 					}
 					else {
-						cout << "\nÄ¹¤F" << player[0].bet;
+						cout << "\nè´äº†" << player[0].bet;
 						player[0].money += player[0].bet;
 					}
 				}
 				else if (getPoint(player[0].hand) == 21) {
 					if (player[0].isBlackjack) {
-						cout << "\nblackjack Ä¹¤F" << player[0].bet * 3 / 2;
+						cout << "\nblackjack è´äº†" << player[0].bet * 3 / 2;
 						player[0].money += player[0].bet * 3 / 2;
 					}
 					else if (player[0].handNum == 5) {
-						cout << "\n¤­Às Ä¹¤F" << player[0].bet * 3;
+						cout << "\näº”é¾ è´äº†" << player[0].bet * 3;
 						player[0].money += player[0].bet * 3;
 					}
 					else if (player[0].handNum == 3) {
 						sort(player[0].hand, player[0].hand + 3);
 						if (player[0].hand[0] % 13 == player[0].hand[1] % 13 && player[0].hand[1] % 13 == player[0].hand[2] % 13) {
-							cout << "\n¤T±ø¤C Ä¹¤F" << player[0].bet * 3;
+							cout << "\nä¸‰æ¢ä¸ƒ è´äº†" << player[0].bet * 3;
 							player[0].money += player[0].bet * 3;
 						}
 						else if (getPoint(player[0].hand[0]) == 6 && getPoint(player[0].hand[1]) == 7 && getPoint(player[0].hand[2]) == 8) {
-							cout << "\n¶¶ Ä¹¤F" << player[0].bet * 3;
+							cout << "\né † è´äº†" << player[0].bet * 3;
 							player[0].money += player[0].bet * 3;
 						}
 						else {
-							cout << "\nÄ¹¤F" << player[0].bet;
+							cout << "\nè´äº†" << player[0].bet;
 							player[0].money += player[0].bet;
 						}
 					}
 					else {
-						cout << "\nÄ¹¤F" << player[0].bet;
+						cout << "\nè´äº†" << player[0].bet;
 						player[0].money += player[0].bet;
 					}
 				}
 				else {
-					cout << "\n¥­";
+					cout << "\nå¹³";
 				}
 			}
 		}
 		else {
-			if (dealerHandNum == 2) {//²ø®ablackjack
+			if (dealerHandNum == 2) {//èŠå®¶blackjack
 				if (player[0].isSurrender) {
-					cout << "\n§ë­° ¿é¤F" << player[0].bet / 2;
+					cout << "\næŠ•é™ è¼¸äº†" << player[0].bet / 2;
 				}
 				else if (player[0].isSplit) {
 					if (getPoint(player[0].hand) == 21) {
-						cout << "\n¥­";
+						cout << "\nå¹³";
 					}
 					else {
-						cout << "\n¿é¤F" << player[0].bet;
+						cout << "\nè¼¸äº†" << player[0].bet;
 						player[0].money -= player[0].bet;
 					}
 					if (getPoint(player[0].split) == 21) {
-						cout << "\n¤ÀµP¥­";
+						cout << "\nåˆ†ç‰Œå¹³";
 					}
 					else {
-						cout << "\n¤ÀµP¿é¤F" << player[0].splitBet;
+						cout << "\nåˆ†ç‰Œè¼¸äº†" << player[0].splitBet;
 						player[0].money -= player[0].splitBet;
 					}
 				}
 				else {
 					if (getPoint(player[0].hand) < 21) {
 						if (player[0].handNum == 5) {
-							cout << "\n¤­Às Ä¹¤F" << player[0].bet * 3;
+							cout << "\näº”é¾ è´äº†" << player[0].bet * 3;
 							player[0].money += player[0].bet * 3;
 						}
 						else {
-							cout << "\n¿é¤F" << player[0].bet;
+							cout << "\nè¼¸äº†" << player[0].bet;
 							player[0].money -= player[0].bet;
 						}
 					}
 					else if (getPoint(player[0].hand) == 21) {
 						if (player[0].isBlackjack) {
-							cout << "\nblackjack ¥­";
+							cout << "\nblackjack å¹³";
 						}
 						else if (player[0].handNum == 5) {
-							cout << "\n¤­Às Ä¹¤F" << player[0].bet * 3;
+							cout << "\näº”é¾ è´äº†" << player[0].bet * 3;
 							player[0].money += player[0].bet * 3;
 						}
 						else if (player[0].handNum == 3) {
 							sort(player[0].hand, player[0].hand + 3);
 							if (player[0].hand[0] % 13 == player[0].hand[1] % 13 && player[0].hand[1] % 13 == player[0].hand[2] % 13) {
-								cout << "\n¤T±ø¤C Ä¹¤F" << player[0].bet * 3;
+								cout << "\nä¸‰æ¢ä¸ƒ è´äº†" << player[0].bet * 3;
 								player[0].money += player[0].bet * 3;
 							}
 							else if (getPoint(player[0].hand[0]) == 6 && getPoint(player[0].hand[1]) == 7 && getPoint(player[0].hand[2]) == 8) {
-								cout << "\n¶¶ Ä¹¤F" << player[0].bet * 3;
+								cout << "\né † è´äº†" << player[0].bet * 3;
 								player[0].money += player[0].bet * 3;
 							}
 							else {
-								cout << "\n¥­";
+								cout << "\nå¹³";
 							}
 						}
 						else {
-							cout << "\n¥­";
+							cout << "\nå¹³";
 						}
 					}
 					else {
-						cout << "\n¿é¤F" << player[0].bet;
+						cout << "\nè¼¸äº†" << player[0].bet;
 						player[0].money -= player[0].bet;
 					}
 				}
 			}
-			else {//²ø®a21ÂI(«Dblackjack)
+			else {//èŠå®¶21é»(éblackjack)
 				if (player[0].isSurrender) {
-					cout << "\n§ë­° ¿é¤F" << player[0].bet / 2;
+					cout << "\næŠ•é™ è¼¸äº†" << player[0].bet / 2;
 				}
 				else if (player[0].isSplit) {
 					if (getPoint(player[0].hand) == 21) {
-						cout << "\n¥­";
+						cout << "\nå¹³";
 					}
 					else {
-						cout << "\n¿é¤F" << player[0].bet;
+						cout << "\nè¼¸äº†" << player[0].bet;
 						player[0].money -= player[0].bet;
 					}
 					if (getPoint(player[0].split) == 21) {
-						cout << "\n¤ÀµP¥­";
+						cout << "\nåˆ†ç‰Œå¹³";
 					}
 					else {
-						cout << "\n¤ÀµP¿é¤F" << player[0].splitBet;
+						cout << "\nåˆ†ç‰Œè¼¸äº†" << player[0].splitBet;
 						player[0].money -= player[0].splitBet;
 					}
 				}
 				else {
 					if (getPoint(player[0].hand) < 21) {
 						if (player[0].handNum == 5) {
-							cout << "\n¤­Às Ä¹¤F" << player[0].bet * 3;
+							cout << "\näº”é¾ è´äº†" << player[0].bet * 3;
 							player[0].money += player[0].bet * 3;
 						}
 						else {
-							cout << "\n¿é¤F" << player[0].bet;
+							cout << "\nè¼¸äº†" << player[0].bet;
 							player[0].money -= player[0].bet;
 						}
 					}
 					else if (getPoint(player[0].hand) == 21) {
 						if (player[0].isBlackjack) {
-							cout << "\nblackjack Ä¹¤F" << player[0].bet * 3 / 2;
+							cout << "\nblackjack è´äº†" << player[0].bet * 3 / 2;
 							player[0].money += player[0].bet * 3 / 2;
 						}
 						else if (player[0].handNum == 5) {
-							cout << "\n¤­Às Ä¹¤F" << player[0].bet * 3;
+							cout << "\näº”é¾ è´äº†" << player[0].bet * 3;
 							player[0].money += player[0].bet * 3;
 						}
 						else if (player[0].handNum == 3) {
 							sort(player[0].hand, player[0].hand + 3);
 							if (player[0].hand[0] % 13 == player[0].hand[1] % 13 && player[0].hand[1] % 13 == player[0].hand[2] % 13) {
-								cout << "\n¤T±ø¤C Ä¹¤F" << player[0].bet * 3;
+								cout << "\nä¸‰æ¢ä¸ƒ è´äº†" << player[0].bet * 3;
 								player[0].money += player[0].bet * 3;
 							}
 							else if (getPoint(player[0].hand[0]) == 6 && getPoint(player[0].hand[1]) == 7 && getPoint(player[0].hand[2]) == 8) {
-								cout << "\n¶¶ Ä¹¤F" << player[0].bet * 3;
+								cout << "\né † è´äº†" << player[0].bet * 3;
 								player[0].money += player[0].bet * 3;
 							}
 							else {
-								cout << "\n¥­";
+								cout << "\nå¹³";
 							}
 						}
 						else {
-							cout << "\n¥­";
+							cout << "\nå¹³";
 						}
 					}
 					else {
-						cout << "\n¿é¤F" << player[0].bet;
+						cout << "\nè¼¸äº†" << player[0].bet;
 						player[0].money -= player[0].bet;
 					}
 				}
 			}
 		}
 	}
-	else {//²ø®a¤£¨ì21ÂI
+	else {//èŠå®¶ä¸åˆ°21é»
 		if (player[0].isSurrender) {
-			cout << "\n§ë­° ¿é¤F" << player[0].bet / 2;
+			cout << "\næŠ•é™ è¼¸äº†" << player[0].bet / 2;
 		}
 		else if (player[0].isSplit) {
 			if (getPoint(player[0].hand) > getPoint(dealer)) {
-				cout << "\nÄ¹¤F" << player[0].bet;
+				cout << "\nè´äº†" << player[0].bet;
 				player[0].money += player[0].bet;
 			}
 			else if (getPoint(player[0].hand) == getPoint(dealer)) {
-				cout << "\n¥­";
+				cout << "\nå¹³";
 			}
 			else {
-				cout << "\n¿é¤F" << player[0].bet;
+				cout << "\nè¼¸äº†" << player[0].bet;
 				player[0].money -= player[0].bet;
 			}
 			if (getPoint(player[0].split) > getPoint(dealer)) {
-				cout << "\n¤ÀµPÄ¹¤F" << player[0].splitBet;
+				cout << "\nåˆ†ç‰Œè´äº†" << player[0].splitBet;
 				player[0].money += player[0].splitBet;
 			}
 			else if (getPoint(player[0].split) == getPoint(dealer)) {
-				cout << "\n¤ÀµP¥­";
+				cout << "\nåˆ†ç‰Œå¹³";
 			}
 			else {
-				cout << "\n¤ÀµP¿é¤F" << player[0].splitBet;
+				cout << "\nåˆ†ç‰Œè¼¸äº†" << player[0].splitBet;
 				player[0].money -= player[0].splitBet;
 			}
 		}
 		else {
 			if (getPoint(player[0].hand) < 21) {
 				if (player[0].handNum == 5) {
-					cout << "\n¤­Às Ä¹¤F" << player[0].bet * 3;
+					cout << "\näº”é¾ è´äº†" << player[0].bet * 3;
 					player[0].money += player[0].bet * 3;
 				}
 				else if (getPoint(player[0].hand) > getPoint(dealer)) {
-					cout << "\nÄ¹¤F" << player[0].bet;
+					cout << "\nè´äº†" << player[0].bet;
 					player[0].money += player[0].bet;
 				}
 				else if (getPoint(player[0].hand) == getPoint(dealer)) {
-					cout << "\n¥­";
+					cout << "\nå¹³";
 				}
 				else {
-					cout << "\n¿é¤F" << player[0].bet;
+					cout << "\nè¼¸äº†" << player[0].bet;
 					player[0].money -= player[0].bet;
 				}
 			}
 			else if (getPoint(player[0].hand) == 21) {
 				if (player[0].isBlackjack) {
-					cout << "\nblackjack Ä¹¤F" << player[0].bet * 3 / 2;
+					cout << "\nblackjack è´äº†" << player[0].bet * 3 / 2;
 					player[0].money += player[0].bet * 3 / 2;
 				}
 				else if (player[0].handNum == 5) {
-					cout << "\n¤­Às Ä¹¤F" << player[0].bet * 3;
+					cout << "\näº”é¾ è´äº†" << player[0].bet * 3;
 					player[0].money += player[0].bet * 3;
 				}
 				else if (player[0].handNum == 3) {
 					sort(player[0].hand, player[0].hand + 3);
 					if (player[0].hand[0] % 13 == player[0].hand[1] % 13 && player[0].hand[1] % 13 == player[0].hand[2] % 13) {
-						cout << "\n¤T±ø¤C Ä¹¤F" << player[0].bet * 3;
+						cout << "\nä¸‰æ¢ä¸ƒ è´äº†" << player[0].bet * 3;
 						player[0].money += player[0].bet * 3;
 					}
 					else if (getPoint(player[0].hand[0]) == 6 && getPoint(player[0].hand[1]) == 7 && getPoint(player[0].hand[2]) == 8) {
-						cout << "\n¶¶ Ä¹¤F" << player[0].bet * 3;
+						cout << "\né † è´äº†" << player[0].bet * 3;
 						player[0].money += player[0].bet * 3;
 					}
 					else {
-						cout << "\nÄ¹¤F" << player[0].bet;
+						cout << "\nè´äº†" << player[0].bet;
 						player[0].money += player[0].bet;
 					}
 				}
 				else {
-					cout << "\nÄ¹¤F" << player[0].bet;
+					cout << "\nè´äº†" << player[0].bet;
 					player[0].money += player[0].bet;
 				}
 			}
 			else {
-				cout << "\n¿é¤F" << player[0].bet;
+				cout << "\nè¼¸äº†" << player[0].bet;
 				player[0].money -= player[0].bet;
 			}
 		}
@@ -959,200 +958,200 @@ void BlackJack::process() {
 
 
 	if (getPoint(dealer) >= 21) {
-		if (getPoint(dealer) > 21) {//²ø®aÃzµP
+		if (getPoint(dealer) > 21) {//èŠå®¶çˆ†ç‰Œ
 			for (int i = 1; i < playerNum; i++) {
 				if (player[i].isSurrender) {
-					cout << "\nplayer" << i << "§ë­° ¿é¤F" << player[i].bet / 2;
+					cout << "\nplayer" << i << "æŠ•é™ è¼¸äº†" << player[i].bet / 2;
 				}
 				else if (player[i].isSplit) {
 					if (getPoint(player[i].hand) <= 21) {
-						cout << "\nplayer" << i << "Ä¹¤F" << player[i].bet;
+						cout << "\nplayer" << i << "è´äº†" << player[i].bet;
 						player[i].money += player[i].bet;
 					}
 					else {
-						cout << "\nplayer" << i << "¥­";
+						cout << "\nplayer" << i << "å¹³";
 					}
 					if (getPoint(player[i].split) <= 21) {
-						cout << "\nplayer" << i << "¤ÀµPÄ¹¤F" << player[i].splitBet;
+						cout << "\nplayer" << i << "åˆ†ç‰Œè´äº†" << player[i].splitBet;
 						player[i].money += player[i].splitBet;
 					}
 					else {
-						cout << "\nplayer" << i << "¤ÀµP¥­";
+						cout << "\nplayer" << i << "åˆ†ç‰Œå¹³";
 					}
 				}
 				else {
 					if (getPoint(player[i].hand) < 21) {
 						if (player[i].handNum == 5) {
-							cout << "\nplayer" << i << "¤­Às Ä¹¤F" << player[i].bet * 3;
+							cout << "\nplayer" << i << "äº”é¾ è´äº†" << player[i].bet * 3;
 							player[i].money += player[i].bet * 3;
 						}
 						else {
-							cout << "\nplayer" << i << "Ä¹¤F" << player[i].bet;
+							cout << "\nplayer" << i << "è´äº†" << player[i].bet;
 							player[i].money += player[i].bet;
 						}
 					}
 					else if (getPoint(player[i].hand) == 21) {
 						if (player[i].isBlackjack) {
-							cout << "\nplayer" << i << "blackjack Ä¹¤F" << player[i].bet * 3 / 2;
+							cout << "\nplayer" << i << "blackjack è´äº†" << player[i].bet * 3 / 2;
 							player[i].money += player[i].bet * 3 / 2;
 						}
 						else if (player[i].handNum == 5) {
-							cout << "\nplayer" << i << "¤­Às Ä¹¤F" << player[i].bet * 3;
+							cout << "\nplayer" << i << "äº”é¾ è´äº†" << player[i].bet * 3;
 							player[i].money += player[i].bet * 3;
 						}
 						else if (player[i].handNum == 3) {
 							sort(player[i].hand, player[i].hand + 3);
 							if (player[i].hand[0] % 13 == player[i].hand[1] % 13 && player[i].hand[1] % 13 == player[i].hand[2] % 13) {
-								cout << "\nplayer" << i << "¤T±ø¤C Ä¹¤F" << player[i].bet * 3;
+								cout << "\nplayer" << i << "ä¸‰æ¢ä¸ƒ è´äº†" << player[i].bet * 3;
 								player[i].money += player[i].bet * 3;
 							}
 							else if (getPoint(player[i].hand[0]) == 6 && getPoint(player[i].hand[1]) == 7 && getPoint(player[i].hand[2]) == 8) {
-								cout << "\nplayer" << i << "¶¶ Ä¹¤F" << player[i].bet * 3;
+								cout << "\nplayer" << i << "é † è´äº†" << player[i].bet * 3;
 								player[i].money += player[i].bet * 3;
 							}
 							else {
-								cout << "\nplayer" << i << "Ä¹¤F" << player[i].bet;
+								cout << "\nplayer" << i << "è´äº†" << player[i].bet;
 								player[i].money += player[i].bet;
 							}
 						}
 						else {
-							cout << "\nplayer" << i << "Ä¹¤F" << player[i].bet;
+							cout << "\nplayer" << i << "è´äº†" << player[i].bet;
 							player[i].money += player[i].bet;
 						}
 					}
 					else {
-						cout << "\nplayer" << i << "¥­";
+						cout << "\nplayer" << i << "å¹³";
 					}
 				}
 			}
 		}
 		else {
-			if (dealerHandNum == 2) {//²ø®ablackjack
+			if (dealerHandNum == 2) {//èŠå®¶blackjack
 				for (int i = 1; i < playerNum; i++) {
 					if (player[i].isSurrender) {
-						cout << "\nplayer" << i << "§ë­° ¿é¤F" << player[i].bet / 2;
+						cout << "\nplayer" << i << "æŠ•é™ è¼¸äº†" << player[i].bet / 2;
 					}
 					else if (player[i].isSplit) {
 						if (getPoint(player[i].hand) == 21) {
-							cout << "\nplayer" << i << "¥­";
+							cout << "\nplayer" << i << "å¹³";
 						}
 						else {
-							cout << "\nplayer" << i << "¿é¤F" << player[i].bet;
+							cout << "\nplayer" << i << "è¼¸äº†" << player[i].bet;
 							player[i].money -= player[i].bet;
 						}
 						if (getPoint(player[i].split) == 21) {
-							cout << "\nplayer" << i << "¤ÀµP¥­";
+							cout << "\nplayer" << i << "åˆ†ç‰Œå¹³";
 						}
 						else {
-							cout << "\nplayer" << i << "¤ÀµP¿é¤F" << player[i].splitBet;
+							cout << "\nplayer" << i << "åˆ†ç‰Œè¼¸äº†" << player[i].splitBet;
 							player[i].money -= player[i].splitBet;
 						}
 					}
 					else {
 						if (getPoint(player[i].hand) < 21) {
 							if (player[i].handNum == 5) {
-								cout << "\nplayer" << i << "¤­Às Ä¹¤F" << player[i].bet * 3;
+								cout << "\nplayer" << i << "äº”é¾ è´äº†" << player[i].bet * 3;
 								player[i].money += player[i].bet * 3;
 							}
 							else {
-								cout << "\nplayer" << i << "¿é¤F" << player[i].bet;
+								cout << "\nplayer" << i << "è¼¸äº†" << player[i].bet;
 								player[i].money -= player[i].bet;
 							}
 						}
 						else if (getPoint(player[i].hand) == 21) {
 							if (player[i].isBlackjack) {
-								cout << "\nplayer" << i << "blackjack ¥­";
+								cout << "\nplayer" << i << "blackjack å¹³";
 							}
 							else if (player[i].handNum == 5) {
-								cout << "\nplayer" << i << "¤­Às Ä¹¤F" << player[i].bet * 3;
+								cout << "\nplayer" << i << "äº”é¾ è´äº†" << player[i].bet * 3;
 								player[i].money += player[i].bet * 3;
 							}
 							else if (player[i].handNum == 3) {
 								sort(player[i].hand, player[i].hand + 3);
 								if (player[i].hand[0] % 13 == player[i].hand[1] % 13 && player[i].hand[1] % 13 == player[i].hand[2] % 13) {
-									cout << "\nplayer" << i << "¤T±ø¤C Ä¹¤F" << player[i].bet * 3;
+									cout << "\nplayer" << i << "ä¸‰æ¢ä¸ƒ è´äº†" << player[i].bet * 3;
 									player[i].money += player[i].bet * 3;
 								}
 								else if (getPoint(player[i].hand[0]) == 6 && getPoint(player[i].hand[1]) == 7 && getPoint(player[i].hand[2]) == 8) {
-									cout << "\nplayer" << i << "¶¶ Ä¹¤F" << player[i].bet * 3;
+									cout << "\nplayer" << i << "é † è´äº†" << player[i].bet * 3;
 									player[i].money += player[i].bet * 3;
 								}
 								else {
-									cout << "\nplayer" << i << "¥­";
+									cout << "\nplayer" << i << "å¹³";
 								}
 							}
 							else {
-								cout << "\nplayer" << i << "¥­";
+								cout << "\nplayer" << i << "å¹³";
 							}
 						}
 						else {
-							cout << "\nplayer" << i << "¿é¤F" << player[i].bet;
+							cout << "\nplayer" << i << "è¼¸äº†" << player[i].bet;
 							player[i].money -= player[i].bet;
 						}
 					}
 				}
 			}
-			else {//²ø®a21ÂI(«Dblackjack)
+			else {//èŠå®¶21é»(éblackjack)
 				for (int i = 1; i < playerNum; i++) {
 					if (player[i].isSurrender) {
-						cout << "\nplayer" << i << "§ë­° ¿é¤F" << player[i].bet / 2;
+						cout << "\nplayer" << i << "æŠ•é™ è¼¸äº†" << player[i].bet / 2;
 					}
 					else if (player[i].isSplit) {
 						if (getPoint(player[i].hand) == 21) {
-							cout << "\nplayer" << i << "¥­";
+							cout << "\nplayer" << i << "å¹³";
 						}
 						else {
-							cout << "\nplayer" << i << "¿é¤F" << player[i].bet;
+							cout << "\nplayer" << i << "è¼¸äº†" << player[i].bet;
 							player[i].money -= player[i].bet;
 						}
 						if (getPoint(player[i].split) == 21) {
-							cout << "\nplayer" << i << "¤ÀµP¥­";
+							cout << "\nplayer" << i << "åˆ†ç‰Œå¹³";
 						}
 						else {
-							cout << "\nplayer" << i << "¤ÀµP¿é¤F" << player[i].splitBet;
+							cout << "\nplayer" << i << "åˆ†ç‰Œè¼¸äº†" << player[i].splitBet;
 							player[i].money -= player[i].splitBet;
 						}
 					}
 					else {
 						if (getPoint(player[i].hand) < 21) {
 							if (player[i].handNum == 5) {
-								cout << "\nplayer" << i << "¤­Às Ä¹¤F" << player[i].bet * 3;
+								cout << "\nplayer" << i << "äº”é¾ è´äº†" << player[i].bet * 3;
 								player[i].money += player[i].bet * 3;
 							}
 							else {
-								cout << "\nplayer" << i << "¿é¤F" << player[i].bet;
+								cout << "\nplayer" << i << "è¼¸äº†" << player[i].bet;
 								player[i].money -= player[i].bet;
 							}
 						}
 						else if (getPoint(player[i].hand) == 21) {
 							if (player[i].isBlackjack) {
-								cout << "\nplayer" << i << "blackjack Ä¹¤F" << player[i].bet * 3 / 2;
+								cout << "\nplayer" << i << "blackjack è´äº†" << player[i].bet * 3 / 2;
 								player[i].money += player[i].bet * 3 / 2;
 							}
 							else if (player[i].handNum == 5) {
-								cout << "\nplayer" << i << "¤­Às Ä¹¤F" << player[i].bet * 3;
+								cout << "\nplayer" << i << "äº”é¾ è´äº†" << player[i].bet * 3;
 								player[i].money += player[i].bet * 3;
 							}
 							else if (player[i].handNum == 3) {
 								sort(player[i].hand, player[i].hand + 3);
 								if (player[i].hand[0] % 13 == player[i].hand[1] % 13 && player[i].hand[1] % 13 == player[i].hand[2] % 13) {
-									cout << "\nplayer" << i << "¤T±ø¤C Ä¹¤F" << player[i].bet * 3;
+									cout << "\nplayer" << i << "ä¸‰æ¢ä¸ƒ è´äº†" << player[i].bet * 3;
 									player[i].money += player[i].bet * 3;
 								}
 								else if (getPoint(player[i].hand[0]) == 6 && getPoint(player[i].hand[1]) == 7 && getPoint(player[i].hand[2]) == 8) {
-									cout << "\nplayer" << i << "¶¶ Ä¹¤F" << player[i].bet * 3;
+									cout << "\nplayer" << i << "é † è´äº†" << player[i].bet * 3;
 									player[i].money += player[i].bet * 3;
 								}
 								else {
-									cout << "\nplayer" << i << "¥­";
+									cout << "\nplayer" << i << "å¹³";
 								}
 							}
 							else {
-								cout << "\nplayer" << i << "¥­";
+								cout << "\nplayer" << i << "å¹³";
 							}
 						}
 						else {
-							cout << "\nplayer" << i << "¿é¤F" << player[i].bet;
+							cout << "\nplayer" << i << "è¼¸äº†" << player[i].bet;
 							player[i].money -= player[i].bet;
 						}
 					}
@@ -1160,84 +1159,84 @@ void BlackJack::process() {
 			}
 		}
 	}
-	else {//²ø®a¤£¨ì21ÂI
+	else {//èŠå®¶ä¸åˆ°21é»
 		for (int i = 1; i < playerNum; i++) {
 			if (player[i].isSurrender) {
-				cout << "\nplayer" << i << "§ë­° ¿é¤F" << player[i].bet / 2;
+				cout << "\nplayer" << i << "æŠ•é™ è¼¸äº†" << player[i].bet / 2;
 			}
 			else if (player[i].isSplit) {
 				if (getPoint(player[i].hand) > getPoint(dealer)) {
-					cout << "\nplayer" << i << "Ä¹¤F" << player[i].bet;
+					cout << "\nplayer" << i << "è´äº†" << player[i].bet;
 					player[i].money += player[i].bet;
 				}
 				else if (getPoint(player[i].hand) == getPoint(dealer)) {
-					cout << "\nplayer" << i << "¥­";
+					cout << "\nplayer" << i << "å¹³";
 				}
 				else {
-					cout << "\nplayer" << i << "¿é¤F" << player[i].bet;
+					cout << "\nplayer" << i << "è¼¸äº†" << player[i].bet;
 					player[i].money -= player[i].bet;
 				}
 				if (getPoint(player[i].split) > getPoint(dealer)) {
-					cout << "\nplayer" << i << "¤ÀµPÄ¹¤F" << player[i].splitBet;
+					cout << "\nplayer" << i << "åˆ†ç‰Œè´äº†" << player[i].splitBet;
 					player[i].money += player[i].splitBet;
 				}
 				else if (getPoint(player[i].split) == getPoint(dealer)) {
-					cout << "\nplayer" << i << "¤ÀµP¥­";
+					cout << "\nplayer" << i << "åˆ†ç‰Œå¹³";
 				}
 				else {
-					cout << "\nplayer" << i << "¤ÀµP¿é¤F" << player[i].splitBet;
+					cout << "\nplayer" << i << "åˆ†ç‰Œè¼¸äº†" << player[i].splitBet;
 					player[i].money -= player[i].splitBet;
 				}
 			}
 			else {
 				if (getPoint(player[i].hand) < 21) {
 					if (player[i].handNum == 5) {
-						cout << "\nplayer" << i << "¤­Às Ä¹¤F" << player[i].bet * 3;
+						cout << "\nplayer" << i << "äº”é¾ è´äº†" << player[i].bet * 3;
 						player[i].money += player[i].bet * 3;
 					}
 					else if (getPoint(player[i].hand) > getPoint(dealer)) {
-						cout << "\nplayer" << i << "Ä¹¤F" << player[i].bet;
+						cout << "\nplayer" << i << "è´äº†" << player[i].bet;
 						player[i].money += player[i].bet;
 					}
 					else if (getPoint(player[i].hand) == getPoint(dealer)) {
-						cout << "\nplayer" << i << "¥­";
+						cout << "\nplayer" << i << "å¹³";
 					}
 					else {
-						cout << "\nplayer" << i << "¿é¤F" << player[i].bet;
+						cout << "\nplayer" << i << "è¼¸äº†" << player[i].bet;
 						player[i].money -= player[i].bet;
 					}
 				}
 				else if (getPoint(player[i].hand) == 21) {
 					if (player[i].isBlackjack) {
-						cout << "\nplayer" << i << "blackjack Ä¹¤F" << player[i].bet * 3 / 2;
+						cout << "\nplayer" << i << "blackjack è´äº†" << player[i].bet * 3 / 2;
 						player[i].money += player[i].bet * 3 / 2;
 					}
 					else if (player[i].handNum == 5) {
-						cout << "\nplayer" << i << "¤­Às Ä¹¤F" << player[i].bet * 3;
+						cout << "\nplayer" << i << "äº”é¾ è´äº†" << player[i].bet * 3;
 						player[i].money += player[i].bet * 3;
 					}
 					else if (player[i].handNum == 3) {
 						sort(player[i].hand, player[i].hand + 3);
 						if (player[i].hand[0] % 13 == player[i].hand[1] % 13 && player[i].hand[1] % 13 == player[i].hand[2] % 13) {
-							cout << "\nplayer" << i << "¤T±ø¤C Ä¹¤F" << player[i].bet * 3;
+							cout << "\nplayer" << i << "ä¸‰æ¢ä¸ƒ è´äº†" << player[i].bet * 3;
 							player[i].money += player[i].bet * 3;
 						}
 						else if (getPoint(player[i].hand[0]) == 6 && getPoint(player[i].hand[1]) == 7 && getPoint(player[i].hand[2]) == 8) {
-							cout << "\nplayer" << i << "¶¶ Ä¹¤F" << player[i].bet * 3;
+							cout << "\nplayer" << i << "é † è´äº†" << player[i].bet * 3;
 							player[i].money += player[i].bet * 3;
 						}
 						else {
-							cout << "\nplayer" << i << "Ä¹¤F" << player[i].bet;
+							cout << "\nplayer" << i << "è´äº†" << player[i].bet;
 							player[i].money += player[i].bet;
 						}
 					}
 					else {
-						cout << "\nplayer" << i << "Ä¹¤F" << player[i].bet;
+						cout << "\nplayer" << i << "è´äº†" << player[i].bet;
 						player[i].money += player[i].bet;
 					}
 				}
 				else {
-					cout << "\nplayer" << i << "¿é¤F" << player[i].bet;
+					cout << "\nplayer" << i << "è¼¸äº†" << player[i].bet;
 					player[i].money -= player[i].bet;
 				}
 			}
@@ -1248,7 +1247,7 @@ void BlackJack::process() {
 
 	for (int i = 0; i < playerNum; i++) {
 
-		(i == 0) ? cout << "\nª±®a" : cout << "\nplayer" << i;
-		cout << "¿ú:" << player[i].money << " ½äª`:" << player[i].bet;
+		(i == 0) ? cout << "\nç©å®¶" : cout << "\nplayer" << i;
+		cout << "éŒ¢:" << player[i].money << " è³­æ³¨:" << player[i].bet;
 	}
 }
